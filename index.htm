@@ -2,598 +2,679 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Happy Birthday Asim Bhai · responsive</title>
-  <!-- Google Fonts + Font Awesome (clean, fast) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday Asim Bhai</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,800;14..32,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* ---------- RESET & VARIABLES ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --gold: #C8A96E;
+      --gold-light: #E8D5A3;
+      --gold-dark: #8B6914;
+      --cream: #FAF6EE;
+      --dark: #0F0E0C;
+      --dark-2: #1C1A15;
+      --dark-3: #2A2720;
+      --text-muted: #9A8F7A;
+      --radius: 20px;
     }
 
-    :root {
-      --space-unit: clamp(0.75rem, 2vw, 1.5rem);
-      --card-bg: rgba(20, 30, 42, 0.8);
-      --glow: #fec898;
-      --accent: #ffb05c;
-      --accent-dark: #d45f2c;
-      --text-light: #f7efe2;
-      --shadow-heavy: 0 1.5rem 2rem -1rem #000000cc;
-      --radius-card: clamp(2rem, 6vw, 4rem);
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html { font-size: 16px; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(145deg, #121926, #203a4e);
+      font-family: 'DM Sans', sans-serif;
+      background: var(--dark);
+      color: var(--cream);
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--space-unit);
-      position: relative;
       overflow-x: hidden;
     }
 
-    /* ---------- SOFT PARTICLES (lighter, performant) ---------- */
-    .bg-particles {
+    /* ── NOISE TEXTURE ── */
+    body::before {
+      content: '';
       position: fixed;
       inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none;
-      z-index: 0;
-      opacity: 0.5;
+      z-index: 1000;
+      opacity: 0.4;
     }
 
-    .bg-particles span {
-      position: absolute;
-      width: clamp(4px, 2vw, 12px);
-      height: clamp(4px, 2vw, 12px);
-      background: rgba(255, 190, 130, 0.25);
-      border-radius: 50%;
-      animation: floatSlow 20s infinite linear;
-      filter: blur(1px);
-    }
-
-    @keyframes floatSlow {
-      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-      10% { opacity: 0.5; }
-      90% { opacity: 0.2; }
-      100% { transform: translateY(-15vh) rotate(360deg); opacity: 0; }
-    }
-
-    /* ---------- MAIN CARD (fully responsive, lighter blur) ---------- */
-    .birthday-card {
+    /* ── APP SHELL ── */
+    .app {
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
       position: relative;
-      z-index: 20;
-      width: 100%;
-      max-width: min(1300px, 95vw);
-      background: rgba(18, 28, 40, 0.65);
-      backdrop-filter: blur(8px) saturate(160%);
-      -webkit-backdrop-filter: blur(8px) saturate(160%);
-      border-radius: var(--radius-card);
-      box-shadow: 0 20px 40px -5px #00000080, 0 0 0 1px rgba(255, 180, 100, 0.25) inset;
-      padding: clamp(1.5rem, 5vw, 3rem) clamp(1.2rem, 4vw, 2.8rem) clamp(2.5rem, 6vw, 4rem);
     }
 
-    /* header flexible */
-    .top-bar {
+    /* ── TOP STATUS BAR STYLE ── */
+    .status-bar {
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem 1.5rem;
-      padding-bottom: clamp(1rem, 3vw, 2rem);
-      border-bottom: 2px dashed #ffb162;
-      margin-bottom: clamp(1.2rem, 4vw, 2.5rem);
+      padding: 14px 20px 0;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
     }
 
-    .logo {
-      font-size: clamp(1.4rem, 4vw, 2.2rem);
-      font-weight: 700;
-      color: #ffdbb5;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .logo i {
-      color: #fdac5f;
-      font-size: 1.4em;
-    }
-
-    .date-badge {
-      background: #253c4e;
-      padding: 0.5rem 1.5rem;
-      border-radius: 3rem;
-      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-      color: #ffe0b9;
-      border: 1.5px solid #fca552;
-      white-space: nowrap;
-    }
-
-    /* ---------- GREETING (fluid typography) ---------- */
-    .greeting-block {
+    /* ── HERO SECTION ── */
+    .hero {
+      position: relative;
+      padding: 28px 20px 32px;
       text-align: center;
-      margin: clamp(1rem, 4vw, 2.5rem) 0 clamp(2rem, 5vw, 4rem);
-      cursor: pointer;
-      transition: transform 0.2s ease;
+      overflow: hidden;
     }
 
-    .greeting-block:active { transform: scale(0.98); }
+    .hero-bg-ring {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      border: 1px solid rgba(200, 169, 110, 0.12);
+      pointer-events: none;
+    }
 
-    .happy-birthday-text {
-      font-size: clamp(2.8rem, 12vw, 7rem);
+    .hero-bg-ring::before {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(200, 169, 110, 0.08);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(200, 169, 110, 0.1);
+      border: 1px solid rgba(200, 169, 110, 0.25);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 22px;
+      animation: fadeSlideDown 0.8s ease both;
+    }
+
+    .tag i { font-size: 9px; }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 13vw;
+      max-font-size: 52px;
+      font-size: clamp(42px, 13vw, 56px);
       font-weight: 900;
-      line-height: 1.1;
-      background: linear-gradient(135deg, #fde48e, #fbb56b, #ff9458);
+      line-height: 1.0;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      animation: fadeSlideUp 0.9s ease 0.1s both;
+    }
+
+    .hero-title span {
+      display: block;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-shadow: 0 8px 20px #d66a28;
-      letter-spacing: clamp(-0.02em, 0.5vw, 0.08em);
     }
 
-    .name-large {
-      font-size: clamp(2.4rem, 8vw, 5rem);
-      font-weight: 800;
-      color: #ffeac2;
-      text-shadow: 4px 4px 0 #1a2c3b;
-      margin-top: -0.2rem;
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 10vw, 44px);
+      font-weight: 700;
+      color: var(--cream);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+      animation: fadeSlideUp 0.9s ease 0.2s both;
     }
 
-    .interactive-hint {
-      margin-top: 0.8rem;
-      font-size: clamp(1rem, 3vw, 1.5rem);
-      color: #e7cdb0;
-      background: #1f2f3bd0;
-      display: inline-block;
-      padding: 0.5rem 1.8rem;
-      border-radius: 4rem;
-      border: 1px solid #fdad5a;
-      backdrop-filter: blur(2px);
-    }
-
-    /* ---------- MARQUEE – fully responsive, smooth, no overflow ---------- */
-    .marquee-section {
-      margin: 2rem 0 3rem;
-      background: #1b2c3ab3;
-      border-radius: clamp(2rem, 5vw, 4rem);
-      padding: clamp(1.2rem, 3vw, 2.2rem) clamp(0.5rem, 2vw, 2rem);
-      border: 2px solid #feb06a;
-      box-shadow: 0 12px 0 #5e3a1f, inset 0 -3px 0 #ffa453;
-    }
-
-    .marquee-header {
+    .hero-divider {
       display: flex;
       align-items: center;
-      gap: 0.8rem 1.5rem;
-      font-size: clamp(1.3rem, 4vw, 2.4rem);
-      font-weight: 700;
-      color: #ffdfb5;
-      margin-bottom: clamp(1rem, 3vw, 2rem);
-      padding-left: 0.5rem;
-      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px auto;
+      max-width: 200px;
+      animation: fadeIn 1s ease 0.4s both;
     }
 
-    .marquee-header i {
-      background: #d48d4b;
-      padding: 0.5rem;
-      border-radius: 50%;
-      color: #1e2f3b;
-      font-size: 1.3em;
+    .hero-divider::before,
+    .hero-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
     }
 
-    .marquee-wrapper {
-      width: 100%;
+    .hero-divider::after {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
+    .hero-divider i { color: var(--gold); font-size: 10px; }
+
+    .hero-date {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeIn 1s ease 0.5s both;
+    }
+
+    /* ── PHOTO MARQUEE ── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px;
+      margin-bottom: 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(200,169,110,0.15);
+    }
+
+    .photos-section {
+      margin: 24px 0;
+    }
+
+    .marquee-outer {
       overflow: hidden;
-      border-radius: clamp(1.5rem, 4vw, 3rem);
-      background: #1b374b;
-      padding: 1rem 0;
+      padding: 4px 0;
     }
 
     .marquee-track {
       display: flex;
+      gap: 10px;
       width: max-content;
-      animation: scrollMarquee 35s linear infinite;
-      gap: clamp(0.8rem, 2vw, 2rem);
-      will-change: transform;
+      animation: marqueeScroll 30s linear infinite;
     }
 
-    /* pause on hover (works on mobile via touch) */
-    .marquee-track:hover {
-      animation-play-state: paused;
+    .marquee-track:active { animation-play-state: paused; }
+
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    /* responsive image cards — no fixed huge width */
-    .marquee-item {
-      width: clamp(180px, 45vw, 320px);
-      background: #fae3c6;
-      border-radius: clamp(1.8rem, 4vw, 3rem);
-      padding: 1rem 1rem 1.2rem;
-      box-shadow: 0 15px 0 #8a401b, 0 20px 20px -10px #000000b0;
-      transition: transform 0.25s ease;
+    .photo-card {
+      flex-shrink: 0;
+      width: 130px;
+      background: var(--dark-2);
+      border-radius: 14px;
+      padding: 8px 8px 10px;
+      border: 1px solid rgba(200,169,110,0.12);
+      transition: border-color 0.2s;
     }
 
-    .marquee-item:hover {
-      transform: scale(1.02) rotate(0.3deg);
-      background: #fff2dd;
-    }
+    .photo-card:active { border-color: rgba(200,169,110,0.4); }
 
-    .marquee-item img {
+    .photo-card img {
       width: 100%;
-      height: clamp(140px, 30vw, 220px);
+      height: 110px;
       object-fit: cover;
-      border-radius: 2rem;
-      border: 5px solid #f48f3f;
-      background: #d9b382;
-      /* lazy loading via attribute */
+      border-radius: 10px;
+      background: var(--dark-3);
+      display: block;
     }
 
-    .caption-style {
-      font-size: clamp(1.2rem, 3.5vw, 1.8rem);
-      font-weight: 700;
-      color: #943d12;
+    .photo-caption {
+      margin-top: 7px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
       text-align: center;
-      margin-top: 1rem;
-      background: #febf7a;
-      border-radius: 3rem;
-      padding: 0.4rem 0.2rem;
-      border: 2px solid #ed702b;
-      line-height: 1.3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    @keyframes scrollMarquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    /* ── MESSAGE CARD ── */
+    .message-section {
+      padding: 0 16px;
+      margin: 8px 0 24px;
     }
 
-    /* ---------- PERSONAL MESSAGE (improved readability) ---------- */
-    .personal-message {
-      background: #172b3ce0;
-      border-radius: 2.5rem;
-      padding: clamp(1.5rem, 4vw, 2.8rem);
-      margin: 2.5rem 0;
-      border-left: 10px solid #fd9f53;
-      border-right: 3px solid #fd9f53;
-      box-shadow: 0 15px 0 #613c1d;
+    .message-card {
+      background: var(--dark-2);
+      border: 1px solid rgba(200,169,110,0.15);
+      border-radius: var(--radius);
+      padding: 22px 20px 24px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .message-text {
-      font-size: clamp(1.2rem, 3.5vw, 1.9rem);
-      line-height: 1.6;
-      color: #f7e8d6;
-      font-weight: 400;
+    .message-card::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      font-family: 'Playfair Display', serif;
+      font-size: 100px;
+      color: rgba(200,169,110,0.08);
+      line-height: 1;
+      pointer-events: none;
     }
 
-    .message-text strong {
-      color: #ffcf94;
-      font-weight: 800;
-      font-size: 1.3em;
+    .message-card::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--gold-light), var(--gold-dark));
+      border-radius: 3px 0 0 3px;
     }
 
-    .signature-friends {
-      margin-top: 1.5rem;
-      font-size: clamp(1.5rem, 5vw, 2.2rem);
-      background: #fdac5c;
-      display: inline-block;
-      padding: 0.6rem 2rem;
-      border-radius: 10rem;
-      color: #1f1f1f;
-      font-weight: 700;
-      border: 3px solid #fff0cb;
+    .message-to {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
 
-    /* ---------- WISHES GRID (mobile → 1 col, tablet 2, desktop 3) ---------- */
-    .wishes-mini {
+    .message-body {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #C8C1B4;
+      font-weight: 300;
+    }
+
+    .message-body strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    .message-sig {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sig-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(200,169,110,0.15);
+    }
+
+    .sig-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* ── WISHES GRID ── */
+    .wishes-section {
+      padding: 0 16px;
+      margin-bottom: 24px;
+    }
+
+    .wishes-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
-      gap: clamp(1rem, 2.5vw, 2rem);
-      margin: 3rem 0 2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
     }
 
-    .wish-item {
-      background: #feb96e;
-      border-radius: 2rem;
-      padding: 1.8rem 1rem;
+    .wish-tile {
+      background: var(--dark-2);
+      border: 1px solid rgba(200,169,110,0.12);
+      border-radius: 14px;
+      padding: 18px 8px;
       text-align: center;
-      border: 4px solid #ea6015;
-      box-shadow: 0 12px 0 #96451b;
       transition: all 0.15s ease;
+      cursor: default;
     }
 
-    .wish-item:active { transform: translateY(6px); box-shadow: 0 5px 0 #96451b; }
-
-    .wish-item i {
-      font-size: clamp(2.5rem, 7vw, 4rem);
-      color: #271a09;
+    .wish-tile:active {
+      transform: scale(0.96);
+      border-color: rgba(200,169,110,0.35);
+      background: var(--dark-3);
     }
 
-    .wish-item h3 {
-      font-size: clamp(1.4rem, 4vw, 2rem);
+    .wish-tile .icon {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .wish-tile .label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ── CTA BUTTON ── */
+    .cta-section {
+      padding: 0 16px;
+      margin-bottom: 24px;
+    }
+
+    .cta-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #D4AA6A, #8B6914);
+      border: none;
+      border-radius: 14px;
+      padding: 18px 24px;
+      color: var(--dark);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
       font-weight: 700;
-      margin: 0.5rem 0 0;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.15s ease;
+      box-shadow: 0 4px 20px rgba(200,169,110,0.2);
+      position: relative;
+      overflow: hidden;
     }
 
-    /* ---------- BUTTON (fully adaptive) ---------- */
-    .action-row {
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
+      transition: background 0.15s;
+    }
+
+    .cta-btn:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 10px rgba(200,169,110,0.15);
+    }
+
+    .cta-btn:active::after { background: rgba(255,255,255,0.12); }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 16px 20px 36px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 11px;
+      color: rgba(154,143,122,0.5);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-dots {
       display: flex;
       justify-content: center;
-      margin: 3rem 0 1.5rem;
+      gap: 5px;
+      margin-bottom: 10px;
     }
 
-    .celebrate-button {
-      background: #ffb347;
-      border: 5px solid #f46f2c;
-      font-size: clamp(1.8rem, 6vw, 3.2rem);
-      font-weight: 800;
-      padding: 1rem 2.5rem;
-      border-radius: 10rem;
-      color: #221603;
-      box-shadow: 0 18px 0 #96451f, 0 20px 25px -5px #2c1409;
-      cursor: pointer;
-      transition: all 0.06s linear;
-      display: inline-flex;
-      align-items: center;
-      gap: 1.2rem;
-      border: none;
-      line-height: 1.2;
+    .footer-dots span {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold-dark);
     }
 
-    .celebrate-button:active {
-      transform: translateY(12px);
-      box-shadow: 0 6px 0 #96451f, 0 15px 20px -5px #2c1409;
+    /* ── CONFETTI EMOJI ── */
+    .confetti-em {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: transform, opacity;
     }
 
-    .footer-note {
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      background: var(--dark-2);
+      border: 1px solid rgba(200,169,110,0.35);
+      color: var(--cream);
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 20px 30px;
+      border-radius: 18px;
+      z-index: 10000;
       text-align: center;
-      margin-top: 2.5rem;
-      color: #c7af92;
-      font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: toastIn 0.3s ease forwards;
     }
 
-    /* touch / mobile fine-tuning */
-    @media (max-width: 480px) {
-      .marquee-item {
-        width: 160px;
-      }
-      .caption-style {
-        font-size: 1rem;
-        white-space: normal; /* allow wrap on very small */
-      }
-      .top-bar {
-        flex-direction: column;
-        align-items: start;
-      }
-      .date-badge {
-        white-space: normal;
-      }
+    .toast .toast-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gold);
+      display: block;
+      margin-top: 4px;
+      letter-spacing: 0.08em;
     }
 
-    /* improve contrast / professional touch */
-    .birthday-card {
-      border: 1px solid rgba(255, 170, 100, 0.25);
+    @keyframes toastIn {
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
     }
 
-    .greeting-block .interactive-hint i {
-      margin: 0 0.3rem;
+    /* ── ANIMATIONS ── */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* performance: remove heavy blur on mobile */
-    @media (max-width: 600px) {
-      .birthday-card {
-        backdrop-filter: blur(4px);
-      }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* lazy load images will fade in (optional) */
-    img {
-      transition: opacity 0.2s;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── SPARKLE DOTS ── */
+    .sparkle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0;
+      animation: sparkleAnim 4s ease infinite;
+    }
+
+    @keyframes sparkleAnim {
+      0%,100% { opacity: 0; transform: scale(0); }
+      50%      { opacity: 0.7; transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <!-- lighter background particles (fewer, faster) -->
-  <div class="bg-particles" id="particles"></div>
+<div class="app">
 
-  <main class="birthday-card">
-    <div class="top-bar">
-      <div class="logo"><i class="fas fa-cake-candles"></i> ASIM BHAI · BIRTHDAY</div>
-      <div class="date-badge"><i class="far fa-calendar"></i> celebrate today</div>
-    </div>
+  <!-- Status bar look -->
+  <div class="status-bar">
+    <span>✦ BIRTHDAY CARD</span>
+    <span><i class="fas fa-cake-candles" style="color:var(--gold)"></i></span>
+  </div>
 
-    <!-- clickable birthday headline -->
-    <div class="greeting-block" id="happyBirthdayClick">
-      <div class="happy-birthday-text">HAPPY BIRTHDAY</div>
-      <div class="name-large">ASIM BHAI</div>
-      <div class="interactive-hint"><i class="fas fa-fingerprint"></i> tap for magic <i class="fas fa-fingerprint"></i></div>
-    </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-ring"></div>
+    <div class="sparkle" style="top:30px;left:40px;animation-delay:0s"></div>
+    <div class="sparkle" style="top:60px;right:50px;animation-delay:1.2s"></div>
+    <div class="sparkle" style="bottom:20px;left:30px;animation-delay:2.4s"></div>
 
-    <!-- ===== RESPONSIVE MARQUEE (smooth on all screens) ===== -->
-    <div class="marquee-section">
-      <div class="marquee-header">
-        <i class="fas fa-images"></i> 
-        <span>ASIM BHAI THROUGH THE LENS</span>
-        <i class="fas fa-camera"></i>
-      </div>
-      <div class="marquee-wrapper">
-        <div class="marquee-track">
-          <!-- Image set A (all images with lazy loading) -->
-          <div class="marquee-item"><img src="project.jpeg" alt="Asim project" loading="lazy"><div class="caption-style">📸 project mode</div></div>
-          <div class="marquee-item"><img src="Study.jpeg" alt="Asim study" loading="lazy"><div class="caption-style">📚 study hour</div></div>
-          <div class="marquee-item"><img src="eating.jpeg" alt="Asim eating" loading="lazy"><div class="caption-style">🍽️ feast mode</div></div>
-          <div class="marquee-item"><img src="volg1.jpeg" alt="Asim vlog" loading="lazy"><div class="caption-style">🎥 vlog life</div></div>
-          <div class="marquee-item"><img src="shopping.jpeg" alt="Asim shopping" loading="lazy"><div class="caption-style">🛍️ shopping spree</div></div>
-          <div class="marquee-item"><img src="snapping.jpeg" alt="Asim snap" loading="lazy"><div class="caption-style">🤳 snapping</div></div>
-          <div class="marquee-item"><img src="snapspec.jpeg" alt="special snap" loading="lazy"><div class="caption-style">✨ special snap</div></div>
-          <div class="marquee-item"><img src="calling.jpeg" alt="Asim call" loading="lazy"><div class="caption-style">📞 on phone</div></div>
-          <div class="marquee-item"><img src="cooking.jpeg" alt="Asim cook" loading="lazy"><div class="caption-style">🍳 cooking</div></div>
-          <div class="marquee-item"><img src="professional.jpeg" alt="Asim professional" loading="lazy"><div class="caption-style">💼 professional</div></div>
-          <div class="marquee-item"><img src="walk.jpeg" alt="Asim walk" loading="lazy"><div class="caption-style">🚶 walk on</div></div>
-          <div class="marquee-item"><img src="vlog2.jpeg" alt="vlog2" loading="lazy"><div class="caption-style">🎬 vlog 2</div></div>
-          <!-- duplicate B set for seamless loop -->
-          <div class="marquee-item"><img src="project.jpeg" alt="project" loading="lazy"><div class="caption-style">📸 project mode</div></div>
-          <div class="marquee-item"><img src="Study.jpeg" alt="study" loading="lazy"><div class="caption-style">📚 study hour</div></div>
-          <div class="marquee-item"><img src="eating.jpeg" alt="feast" loading="lazy"><div class="caption-style">🍽️ feast mode</div></div>
-          <div class="marquee-item"><img src="volg1.jpeg" alt="vlog" loading="lazy"><div class="caption-style">🎥 vlog life</div></div>
-          <div class="marquee-item"><img src="shopping.jpeg" alt="shopping" loading="lazy"><div class="caption-style">🛍️ shopping spree</div></div>
-          <div class="marquee-item"><img src="snapping.jpeg" alt="snapping" loading="lazy"><div class="caption-style">🤳 snapping</div></div>
-          <div class="marquee-item"><img src="snapspec.jpeg" alt="snapspec" loading="lazy"><div class="caption-style">✨ special snap</div></div>
-          <div class="marquee-item"><img src="calling.jpeg" alt="calling" loading="lazy"><div class="caption-style">📞 on phone</div></div>
-          <div class="marquee-item"><img src="cooking.jpeg" alt="cooking" loading="lazy"><div class="caption-style">🍳 cooking</div></div>
-          <div class="marquee-item"><img src="professional.jpeg" alt="professional" loading="lazy"><div class="caption-style">💼 professional</div></div>
-          <div class="marquee-item"><img src="vlog2.jpeg" alt="vlog2" loading="lazy"><div class="caption-style">🎬 vlog 2</div></div>
-        </div>
-      </div>
-    </div>
+    <div class="tag"><i class="fas fa-star"></i> Special Day</div>
+    <div class="hero-title">Happy<span>Birthday</span></div>
+    <div class="hero-name">Asim Bhai</div>
+    <div class="hero-divider"><i class="fas fa-circle"></i></div>
+    <div class="hero-date" id="heroDate">Celebrating Today</div>
+  </section>
 
-    <!-- personal message (refined) -->
-    <div class="personal-message">
-      <div class="message-text">
-        <strong>Dear Asim Bhai,</strong> <br>
-        Another year around the sun, and we’re all here to celebrate you – the guy who makes every moment memorable. From random road trips to deep talks, you’ve been the anchor. Wishing you a day as awesome as you are, and a year full of success, laughter, and great stories. Keep being the legend.
-      </div>
-      <div class="signature-friends">
-        <i class="fas fa-heart"></i> kaiser
+  <!-- PHOTOS -->
+  <section class="photos-section">
+    <div class="section-label"><i class="fas fa-images" style="color:var(--gold)"></i> Memories</div>
+    <div class="marquee-outer">
+      <div class="marquee-track" id="marqueeTrack">
+        <!-- Set A -->
+        <div class="photo-card"><img src="project.jpeg" alt="project" loading="lazy"><div class="photo-caption">Project Mode</div></div>
+        <div class="photo-card"><img src="Study.jpeg" alt="study" loading="lazy"><div class="photo-caption">Study Hour</div></div>
+        <div class="photo-card"><img src="eating.jpeg" alt="feast" loading="lazy"><div class="photo-caption">Feast Mode</div></div>
+        <div class="photo-card"><img src="volg1.jpeg" alt="vlog" loading="lazy"><div class="photo-caption">Vlog Life</div></div>
+        <div class="photo-card"><img src="shopping.jpeg" alt="shopping" loading="lazy"><div class="photo-caption">Shopping</div></div>
+        <div class="photo-card"><img src="snapping.jpeg" alt="snap" loading="lazy"><div class="photo-caption">Snapping</div></div>
+        <div class="photo-card"><img src="snapspec.jpeg" alt="special" loading="lazy"><div class="photo-caption">Special Snap</div></div>
+        <div class="photo-card"><img src="calling.jpeg" alt="call" loading="lazy"><div class="photo-caption">On Call</div></div>
+        <div class="photo-card"><img src="cooking.jpeg" alt="cook" loading="lazy"><div class="photo-caption">Cooking</div></div>
+        <div class="photo-card"><img src="professional.jpeg" alt="pro" loading="lazy"><div class="photo-caption">Professional</div></div>
+        <div class="photo-card"><img src="walk.jpeg" alt="walk" loading="lazy"><div class="photo-caption">Walk On</div></div>
+        <div class="photo-card"><img src="vlog2.jpeg" alt="vlog2" loading="lazy"><div class="photo-caption">Vlog 2</div></div>
+        <!-- Set B (duplicate for seamless) -->
+        <div class="photo-card"><img src="project.jpeg" alt="project" loading="lazy"><div class="photo-caption">Project Mode</div></div>
+        <div class="photo-card"><img src="Study.jpeg" alt="study" loading="lazy"><div class="photo-caption">Study Hour</div></div>
+        <div class="photo-card"><img src="eating.jpeg" alt="feast" loading="lazy"><div class="photo-caption">Feast Mode</div></div>
+        <div class="photo-card"><img src="volg1.jpeg" alt="vlog" loading="lazy"><div class="photo-caption">Vlog Life</div></div>
+        <div class="photo-card"><img src="shopping.jpeg" alt="shopping" loading="lazy"><div class="photo-caption">Shopping</div></div>
+        <div class="photo-card"><img src="snapping.jpeg" alt="snap" loading="lazy"><div class="photo-caption">Snapping</div></div>
+        <div class="photo-card"><img src="snapspec.jpeg" alt="special" loading="lazy"><div class="photo-caption">Special Snap</div></div>
+        <div class="photo-card"><img src="calling.jpeg" alt="call" loading="lazy"><div class="photo-caption">On Call</div></div>
+        <div class="photo-card"><img src="cooking.jpeg" alt="cook" loading="lazy"><div class="photo-caption">Cooking</div></div>
+        <div class="photo-card"><img src="professional.jpeg" alt="pro" loading="lazy"><div class="photo-caption">Professional</div></div>
+        <div class="photo-card"><img src="walk.jpeg" alt="walk" loading="lazy"><div class="photo-caption">Walk On</div></div>
+        <div class="photo-card"><img src="vlog2.jpeg" alt="vlog2" loading="lazy"><div class="photo-caption">Vlog 2</div></div>
       </div>
     </div>
+  </section>
 
-    <!-- wish cards -->
-    <div class="wishes-mini">
-      <div class="wish-item"><i class="fas fa-star"></i><h3>stay legendary</h3></div>
-      <div class="wish-item"><i class="fas fa-smile"></i><h3>always happy</h3></div>
-      <div class="wish-item"><i class="fas fa-rocket"></i><h3>reach the sky</h3></div>
+  <!-- MESSAGE -->
+  <section class="message-section">
+    <div class="section-label"><i class="fas fa-envelope-open-text" style="color:var(--gold)"></i> A Message</div>
+    <div class="message-card">
+      <div class="message-to">To: Asim Bhai</div>
+      <div class="message-body">
+        Another year around the sun, and we're all here to celebrate you —
+        the guy who makes every moment memorable.
+        From random road trips to deep talks, you've been the <strong>anchor</strong>.
+        Wishing you a year full of <strong>success, laughter,</strong> and great stories.
+        Keep being the legend.
+      </div>
+      <div class="message-sig">
+        <div class="sig-line"></div>
+        <div class="sig-text">— Kaiser</div>
+      </div>
     </div>
+  </section>
 
-    <!-- big action button (celebrate) -->
-    <div class="action-row">
-      <button class="celebrate-button" id="celebrateBtn">
-        <i class="fas fa-glass-cheers"></i> CELEBRATE <i class="fas fa-confetti"></i>
-      </button>
+  <!-- WISHES -->
+  <section class="wishes-section">
+    <div class="section-label"><i class="fas fa-heart" style="color:var(--gold)"></i> Wishes</div>
+    <div class="wishes-grid">
+      <div class="wish-tile">
+        <div class="icon">⭐</div>
+        <div class="label">Stay Legendary</div>
+      </div>
+      <div class="wish-tile">
+        <div class="icon">🚀</div>
+        <div class="label">Reach the Sky</div>
+      </div>
+      <div class="wish-tile">
+        <div class="icon">😄</div>
+        <div class="label">Always Happy</div>
+      </div>
     </div>
+  </section>
 
-    <div class="footer-note">
-      ✨ made with fun · happy birthday asim bhai ✨
+  <!-- CTA -->
+  <div class="cta-section">
+    <button class="cta-btn" id="celebrateBtn">
+      <i class="fas fa-champagne-glasses"></i>
+      Celebrate!
+    </button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-dots">
+      <span></span><span style="opacity:0.5"></span><span style="opacity:0.25"></span>
     </div>
-  </main>
+    <div class="footer-text">Made with care · Happy Birthday Asim Bhai ✦</div>
+  </footer>
 
-  <script>
-    (function() {
-      // background particles (reduced count for mobile performance)
-      const partDiv = document.getElementById('particles');
-      for (let i = 0; i < 24; i++) {
-        let span = document.createElement('span');
-        let s = Math.floor(Math.random() * 10) + 4;
-        span.style.width = s + 'px';
-        span.style.height = s + 'px';
-        span.style.left = Math.random() * 100 + '%';
-        span.style.animationDuration = (Math.random() * 20 + 18) + 's';
-        span.style.animationDelay = (Math.random() * 6) + 's';
-        span.style.background = `rgba(255, ${170 + Math.floor(Math.random()*60)}, 120, 0.3)`;
-        partDiv.appendChild(span);
-      }
+</div><!-- /app -->
 
-      // click on greeting (confetti-like emoji burst)
-      const hbClick = document.getElementById('happyBirthdayClick');
-      hbClick.addEventListener('click', function(e) {
-        e.stopPropagation();
-        for (let i = 0; i < 12; i++) {
-          let em = document.createElement('div');
-          em.innerText = ['🎉','🎊','🥳','✨','🎂','🎈'][Math.floor(Math.random()*6)];
-          em.style.position = 'fixed';
-          em.style.left = (e.clientX + (Math.random()*200 - 100)) + 'px';
-          em.style.top = (e.clientY - 40 + (Math.random()*150 - 50)) + 'px';
-          em.style.fontSize = (Math.random()*24 + 22) + 'px';
-          em.style.pointerEvents = 'none';
-          em.style.transition = 'all 1s cubic-bezier(0.2,0.9,0.4,1)';
-          em.style.zIndex = '9999';
-          em.style.filter = 'drop-shadow(0 8px 6px #00000050)';
-          document.body.appendChild(em);
-          setTimeout(() => {
-            em.style.transform = `translateY(-200px) scale(2) rotate(340deg)`;
-            em.style.opacity = '0';
-          }, 10);
-          setTimeout(() => { if(em.parentNode) em.remove(); }, 1100);
-        }
-        // short popup message (less intrusive size)
-        const msg = document.createElement('div');
-        msg.innerText = '🎂 HAPPY BIRTHDAY ASIM BHAI! 🎂';
-        msg.style.position = 'fixed';
-        msg.style.top = '30%';
-        msg.style.left = '50%';
-        msg.style.transform = 'translate(-50%, -50%) rotate(-1deg)';
-        msg.style.background = '#fde047';
-        msg.style.color = '#1f2937';
-        msg.style.fontSize = 'clamp(1.5rem, 7vw, 3rem)';
-        msg.style.fontWeight = '800';
-        msg.style.padding = '1rem 2rem';
-        msg.style.borderRadius = '6rem';
-        msg.style.boxShadow = '0 15px 0 #b3541c, 0 20px 25px #00000080';
-        msg.style.border = '4px solid white';
-        msg.style.zIndex = '10000';
-        msg.style.textAlign = 'center';
-        document.body.appendChild(msg);
-        setTimeout(() => { msg.remove(); }, 1500);
+<script>
+(function(){
+  // Set date
+  const d = new Date();
+  document.getElementById('heroDate').textContent = d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+
+  // Touch pause on marquee
+  const track = document.getElementById('marqueeTrack');
+  track.addEventListener('touchstart', () => track.style.animationPlayState = 'paused', {passive:true});
+  track.addEventListener('touchend',   () => track.style.animationPlayState = 'running', {passive:true});
+
+  // Confetti burst
+  function burst(cx, cy) {
+    const emojis = ['🎉','🎊','🥳','✨','🎂','🎈','🍾','💫'];
+    for (let i = 0; i < 14; i++) {
+      const em = document.createElement('div');
+      em.className = 'confetti-em';
+      em.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      em.style.fontSize = (Math.random() * 18 + 20) + 'px';
+      em.style.left = (cx + (Math.random() * 200 - 100)) + 'px';
+      em.style.top  = (cy + (Math.random() * 100 - 80)) + 'px';
+      em.style.opacity = '1';
+      document.body.appendChild(em);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          em.style.transform = `translateY(-${Math.random()*200+100}px) rotate(${Math.random()*720-360}deg) scale(1.6)`;
+          em.style.opacity = '0';
+        });
       });
+      setTimeout(() => em.remove(), 1100);
+    }
+  }
 
-      // CELEBRATE button interaction (confetti + toast)
-      const btn = document.getElementById('celebrateBtn');
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        for (let i = 0; i < 24; i++) {
-          let em = document.createElement('div');
-          em.innerText = ['🎉','🎊','🥳','✨','🪅','🎂','🧁','🍰','🎈','💥'][Math.floor(Math.random()*10)];
-          em.style.position = 'fixed';
-          em.style.left = (e.clientX + (Math.random()*360 - 180)) + 'px';
-          em.style.top = (e.clientY - 70 + (Math.random()*200 - 60)) + 'px';
-          em.style.fontSize = (Math.random()*32 + 26) + 'px';
-          em.style.pointerEvents = 'none';
-          em.style.transition = 'all 1.2s cubic-bezier(0.2,0.8,0.2,1.2)';
-          em.style.zIndex = '9999';
-          em.style.textShadow = '3px 3px 0 #fd9e4b';
-          document.body.appendChild(em);
-          setTimeout(() => {
-            em.style.transform = `translateY(-280px) rotate(520deg) scale(2.5)`;
-            em.style.opacity = '0';
-          }, 20);
-          setTimeout(() => { if(em.parentNode) em.remove(); }, 1400);
-        }
-        const toast = document.createElement('div');
-        toast.innerHTML = '🥳 HAPPY BIRTHDAY ASIM BHAI! 🥳';
-        toast.style.position = 'fixed';
-        toast.style.top = '50%';
-        toast.style.left = '50%';
-        toast.style.transform = 'translate(-50%, -50%) rotate(1deg)';
-        toast.style.background = '#ffd966';
-        toast.style.color = '#2c1609';
-        toast.style.fontSize = 'clamp(2rem, 8vw, 3.8rem)';
-        toast.style.fontWeight = '900';
-        toast.style.padding = '1.5rem 3rem';
-        toast.style.borderRadius = '8rem';
-        toast.style.boxShadow = '0 20px 0 #aa451b, 0 30px 30px #000';
-        toast.style.border = '6px solid white';
-        toast.style.zIndex = '10000';
-        toast.style.textAlign = 'center';
-        document.body.appendChild(toast);
-        setTimeout(() => { if(toast.parentNode) toast.remove(); }, 2000);
-      });
+  function showToast(msg, sub) {
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.innerHTML = msg + (sub ? `<span class="toast-sub">${sub}</span>` : '');
+    document.body.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; setTimeout(()=>t.remove(),400); }, 2000);
+  }
 
-      // marquee pause on hover (touch devices: just hover effect, no need to remove)
-      const track = document.querySelector('.marquee-track');
-      if (track) {
-        track.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
-        track.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
-        // for touch, pause on click? we keep auto scroll, it's fine
-      }
-    })();
-  </script>
+  document.getElementById('celebrateBtn').addEventListener('click', function(e) {
+    const r = this.getBoundingClientRect();
+    burst(r.left + r.width/2, r.top);
+    showToast('🎂 Happy Birthday!', 'Asim Bhai · Wishing you all the best');
+  });
+
+})();
+</script>
 </body>
 </html>

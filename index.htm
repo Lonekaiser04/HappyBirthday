@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Asim Bhai</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(145deg, #1a1f2e, #2d3e5a);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* animated background particles (subtle) */
+    .bg-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-particles span {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 215, 150, 0.2);
+      border-radius: 50%;
+      box-shadow: 0 0 20px #ffb56b;
+      animation: floatParticle 18s infinite linear;
+    }
+
+    @keyframes floatParticle {
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-15vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* main card — elegant & festive */
+    .birthday-card {
+      position: relative;
+      z-index: 20;
+      max-width: 1300px;
+      width: 100%;
+      background: rgba(20, 30, 45, 0.7);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 4rem 4rem 3rem 3rem;
+      box-shadow: 0 40px 70px #00000080, 0 0 0 2px rgba(255, 200, 130, 0.4) inset;
+      padding: 2.5rem 2.5rem 4rem;
+      border: 1px solid rgba(255, 180, 100, 0.4);
+    }
+
+    /* header minimal */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px dashed #ffb776;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #ffddbb;
+      letter-spacing: 2px;
+    }
+
+    .logo i {
+      color: #fdac5f;
+      margin-right: 0.8rem;
+    }
+
+    .date-badge {
+      background: #2f4359;
+      padding: 0.8rem 2rem;
+      border-radius: 3rem;
+      font-size: 1.3rem;
+      color: #ffe3c6;
+      border: 2px solid #fca959;
+    }
+
+    /* === MAIN INTERACTIVE HAPPY BIRTHDAY === */
+    .greeting-block {
+      text-align: center;
+      margin: 1.5rem 0 3rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .greeting-block:hover {
+      transform: scale(1.02);
+    }
+
+    .happy-birthday-text {
+      font-size: 7rem;
+      font-weight: 900;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #fde68a, #fbbf6e, #fe9a5a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 10px 20px #e07c3b, 0 0 0 4px #ffffff40;
+      letter-spacing: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .name-large {
+      font-size: 5rem;
+      font-weight: 800;
+      color: #ffdbb5;
+      text-shadow: 6px 6px 0 #1d2b3b;
+    }
+
+    .interactive-hint {
+      margin-top: 0.8rem;
+      font-size: 1.6rem;
+      color: #cfbba1;
+      background: #1c2a36c0;
+      display: inline-block;
+      padding: 0.5rem 2rem;
+      border-radius: 4rem;
+      border: 1px solid #fdaa5f;
+    }
+
+    /* === PHOTO MARQUEE — BIG, BOLD, CLEAR === */
+    .marquee-section {
+      margin: 3rem 0 4rem;
+      background: #1d2c3bcc;
+      border-radius: 5rem;
+      padding: 2.5rem 2rem;
+      border: 3px solid #fcb070;
+      box-shadow: 0 25px 0 #6e3f18, inset 0 -8px 0 #ffad66;
+    }
+
+    .marquee-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #ffddb0;
+      margin-bottom: 2.5rem;
+      padding-left: 1rem;
+    }
+
+    .marquee-header i {
+      background: #d48d4b;
+      padding: 1rem;
+      border-radius: 50%;
+      color: #1e2f3b;
+      font-size: 2.8rem;
+    }
+
+    .marquee-wrapper {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 4rem;
+      background: #244052;
+      padding: 2rem 0.8rem;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: scrollMarquee 35s linear infinite;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    /* BIG image cards */
+    .marquee-item {
+      width: 420px;               /* nice and large */
+      margin: 0 2.2rem;
+      border-radius: 3.5rem;
+      background: #fae3c6;
+      padding: 1.5rem 1.5rem 2rem 1.5rem;
+      box-shadow: 0 25px 0 #a1491c, 0 35px 30px #000000b0;
+      transform: rotate(0.2deg);
+      transition: 0.2s;
+    }
+
+    .marquee-item:hover {
+      transform: scale(1.02) rotate(-0.5deg);
+      background: #ffefd3;
+    }
+
+    .marquee-item img {
+      width: 100%;
+      height: 290px;              /* taller to fit bigger images */
+      object-fit: cover;
+      border-radius: 3rem;
+      border: 8px solid #f59c4b;
+    }
+
+    .caption-style {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #9f4016;
+      text-align: center;
+      margin-top: 1.4rem;
+      background: #fec27e;
+      border-radius: 4rem;
+      padding: 0.6rem 1rem;
+      border: 3px solid #f57a31;
+    }
+
+    @keyframes scrollMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* === MESSAGE SECTION (personal, no chai/awards) === */
+    .personal-message {
+      background: #1f3345e0;
+      border-radius: 3.5rem;
+      padding: 2.8rem;
+      margin: 3rem 0;
+      border-left: 15px solid #fc9f5b;
+      border-right: 5px solid #fc9f5b;
+      box-shadow: 0 25px 0 #754219;
+    }
+
+    .message-text {
+      font-size: 1.9rem;
+      line-height: 1.6;
+      color: #f7e8d6;
+    }
+
+    .message-text strong {
+      color: #ffc891;
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+
+    .signature-friends {
+      margin-top: 2rem;
+      font-size: 2.4rem;
+      background: #ffb370;
+      display: inline-block;
+      padding: 1rem 3rem;
+      border-radius: 10rem;
+      color: #1f1f1f;
+      font-weight: 700;
+      border: 4px solid #ffefc0;
+    }
+
+    /* simple wish grid (no mentions of chai/awards) */
+    .wishes-mini {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 4rem 0 2.5rem;
+    }
+
+    .wish-item {
+      background: #fec382;
+      border-radius: 3rem;
+      padding: 2rem 1rem;
+      text-align: center;
+      border: 5px solid #f97316;
+      box-shadow: 0 15px 0 #a04f19;
+    }
+
+    .wish-item i {
+      font-size: 4rem;
+      color: #331d0b;
+    }
+
+    .wish-item h3 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0.8rem 0;
+    }
+
+    /* interactive button */
+    .action-row {
+      display: flex;
+      justify-content: center;
+      margin: 3.5rem 0 1.5rem;
+    }
+
+    .celebrate-button {
+      background: #ffb347;
+      border: 8px solid #f57c31;
+      font-size: 3.5rem;
+      font-weight: 800;
+      padding: 1.8rem 6rem;
+      border-radius: 10rem;
+      color: #281505;
+      box-shadow: 0 25px 0 #9f451f, 0 30px 30px #3d1f0b;
+      cursor: pointer;
+      transition: 0.06s linear;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .celebrate-button:active {
+      transform: translateY(16px);
+      box-shadow: 0 9px 0 #9f451f, 0 25px 25px #3d1f0b;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 2rem;
+      color: #b9a187;
+      font-size: 1.5rem;
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .happy-birthday-text { font-size: 4rem; }
+      .name-large { font-size: 3rem; }
+      .marquee-item { width: 300px; }
+      .marquee-item img { height: 200px; }
+      .wishes-mini { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- background particles -->
+  <div class="bg-particles" id="particles"></div>
+
+  <main class="birthday-card">
+    <!-- minimal header -->
+    <div class="top-bar">
+      <div class="logo"><i class="fas fa-cake-candles"></i> ASIM BHAI · BIRTHDAY</div>
+      <div class="date-badge"><i class="far fa-calendar"></i> celebrate today</div>
+    </div>
+
+    <!-- INTERACTIVE HAPPY BIRTHDAY — click it! -->
+    <div class="greeting-block" id="happyBirthdayClick">
+      <div class="happy-birthday-text">HAPPY BIRTHDAY</div>
+      <div class="name-large">ASIM BHAI</div>
+      <div class="interactive-hint"><i class="fas fa-fingerprint"></i> click for magic <i class="fas fa-fingerprint"></i></div>
+    </div>
+
+    <!-- ===== PHOTO MARQUEE — BIG & CLEAR ===== -->
+    <div class="marquee-section">
+      <div class="marquee-header">
+        <i class="fas fa-images"></i> 
+        <span>ASIM BHAI THROUGH THE LENS</span>
+        <i class="fas fa-camera"></i>
+      </div>
+      <div class="marquee-wrapper">
+        <div class="marquee-track">
+          <!-- group A (each with unique caption) -->
+          <div class="marquee-item"><img src="project.jpeg" alt="Asim"><div class="caption-style">📸 project mode</div></div>
+          <div class="marquee-item"><img src="Study.jpeg" alt="Asim"><div class="caption-style">📚 study hour</div></div>
+          <div class="marquee-item"><img src="eating.jpeg" alt="Asim"><div class="caption-style">🍽️ feast mode</div></div>
+          <div class="marquee-item"><img src="volg1.jpeg" alt="Asim"><div class="caption-style">🎥 vlog life</div></div>
+          <div class="marquee-item"><img src="shopping.jpeg" alt="Asim"><div class="caption-style">🛍️ shopping spree</div></div>
+          <div class="marquee-item"><img src="snapping.jpeg" alt="Asim"><div class="caption-style">🤳 snapping</div></div>
+          <div class="marquee-item"><img src="snapspec.jpeg" alt="Asim"><div class="caption-style">✨ special snap</div></div>
+          <div class="marquee-item"><img src="calling.jpeg" alt="Asim"><div class="caption-style">📞 on phone</div></div>
+          <div class="marquee-item"><img src="cooking.jpeg" alt="Asim"><div class="caption-style">🍳 cooking</div></div>
+          <div class="marquee-item"><img src="professional.jpeg" alt="Asim"><div class="caption-style">💼 professional</div></div>
+          <div class="marquee-item"><img src="vlog2.jpeg" alt="Asim"><div class="caption-style">🎬 vlog 2</div></div>
+          <!-- group B (duplicate) -->
+          <div class="marquee-item"><img src="project.jpeg" alt="Asim"><div class="caption-style">📸 project mode</div></div>
+          <div class="marquee-item"><img src="Study.jpeg" alt="Asim"><div class="caption-style">📚 study hour</div></div>
+          <div class="marquee-item"><img src="eating.jpeg" alt="Asim"><div class="caption-style">🍽️ feast mode</div></div>
+          <div class="marquee-item"><img src="volg1.jpeg" alt="Asim"><div class="caption-style">🎥 vlog life</div></div>
+          <div class="marquee-item"><img src="shopping.jpeg" alt="Asim"><div class="caption-style">🛍️ shopping spree</div></div>
+          <div class="marquee-item"><img src="snapping.jpeg" alt="Asim"><div class="caption-style">🤳 snapping</div></div>
+          <div class="marquee-item"><img src="snapspec.jpeg" alt="Asim"><div class="caption-style">✨ special snap</div></div>
+          <div class="marquee-item"><img src="calling.jpeg" alt="Asim"><div class="caption-style">📞 on phone</div></div>
+          <div class="marquee-item"><img src="cooking.jpeg" alt="Asim"><div class="caption-style">🍳 cooking</div></div>
+          <div class="marquee-item"><img src="professional.jpeg" alt="Asim"><div class="caption-style">💼 professional</div></div>
+          <div class="marquee-item"><img src="vlog2.jpeg" alt="Asim"><div class="caption-style">🎬 vlog 2</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- short personal message (no chai/awards) -->
+    <div class="personal-message">
+      <div class="message-text">
+        <strong>Dear Asim Bhai,</strong> <br>
+        Another year around the sun, and we’re all here to celebrate you – the guy who makes every moment memorable. From random road trips to deep talks, you’ve been the anchor. Wishing you a day as awesome as you are, and a year full of success, laughter, and great stories. Keep being the legend.
+      </div>
+      <div class="signature-friends">
+        <i class="fas fa-heart"></i> kaiser
+      </div>
+    </div>
+
+    <!-- minimal wishes (no chai/food) -->
+    <div class="wishes-mini">
+      <div class="wish-item"><i class="fas fa-star"></i><h3>stay legendary</h3></div>
+      <div class="wish-item"><i class="fas fa-smile"></i><h3>always happy</h3></div>
+      <div class="wish-item"><i class="fas fa-rocket"></i><h3>reach the sky</h3></div>
+    </div>
+
+    <!-- big interactive button -->
+    <div class="action-row">
+      <button class="celebrate-button" id="celebrateBtn">
+        <i class="fas fa-glass-cheers"></i> CELEBRATE <i class="fas fa-confetti"></i>
+      </button>
+    </div>
+
+    <div class="footer-note">
+      ✨ made with fun · happy birthday asim bhai ✨
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      // background particles
+      const partDiv = document.getElementById('particles');
+      for (let i = 0; i < 40; i++) {
+        let span = document.createElement('span');
+        let s = Math.floor(Math.random() * 14) + 5;
+        span.style.width = s + 'px';
+        span.style.height = s + 'px';
+        span.style.left = Math.random() * 100 + '%';
+        span.style.animationDuration = (Math.random() * 22 + 16) + 's';
+        span.style.animationDelay = (Math.random() * 8) + 's';
+        span.style.background = `rgba(255, ${180 + Math.floor(Math.random()*50)}, 120, 0.25)`;
+        partDiv.appendChild(span);
+      }
+
+      // INTERACTIVE HAPPY BIRTHDAY TITLE — click to animate/confetti
+      const hbClick = document.getElementById('happyBirthdayClick');
+      hbClick.addEventListener('click', function(e) {
+        e.stopPropagation();
+        // mini confetti burst from title
+        for (let i = 0; i < 12; i++) {
+          let em = document.createElement('div');
+          em.innerText = ['🎉','🎊','🥳','✨','🎂','🎈'][Math.floor(Math.random()*6)];
+          em.style.position = 'fixed';
+          em.style.left = (e.clientX + (Math.random()*200 - 100)) + 'px';
+          em.style.top = (e.clientY - 50 + (Math.random()*150 - 50)) + 'px';
+          em.style.fontSize = (Math.random()*30 + 24) + 'px';
+          em.style.pointerEvents = 'none';
+          em.style.transition = 'all 1s cubic-bezier(0.2,0.9,0.4,1)';
+          em.style.zIndex = '9999';
+          document.body.appendChild(em);
+          setTimeout(() => {
+            em.style.transform = `translateY(-250px) scale(2.2) rotate(360deg)`;
+            em.style.opacity = '0';
+          }, 10);
+          setTimeout(() => { if(em.parentNode) em.remove(); }, 1100);
+        }
+        // subtle pop message
+        const msg = document.createElement('div');
+        msg.innerText = '🎂 HAPPY BIRTHDAY ASIM BHAI! 🎂';
+        msg.style.position = 'fixed';
+        msg.style.top = '30%';
+        msg.style.left = '50%';
+        msg.style.transform = 'translate(-50%, -50%) rotate(-2deg)';
+        msg.style.background = '#fde047';
+        msg.style.color = '#1f2937';
+        msg.style.fontSize = '3rem';
+        msg.style.fontWeight = '800';
+        msg.style.padding = '1.8rem 3.5rem';
+        msg.style.borderRadius = '10rem';
+        msg.style.boxShadow = '0 20px 0 #b3541c, 0 25px 25px #000';
+        msg.style.border = '5px solid white';
+        msg.style.zIndex = '10000';
+        document.body.appendChild(msg);
+        setTimeout(() => { msg.remove(); }, 1600);
+      });
+
+      // big CELEBRATE button interaction
+      const btn = document.getElementById('celebrateBtn');
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        // massive confetti
+        for (let i = 0; i < 30; i++) {
+          let em = document.createElement('div');
+          em.innerText = ['🎉','🎊','🥳','✨','🪅','🎂','🧁','🍰','🎈','💥'][Math.floor(Math.random()*10)];
+          em.style.position = 'fixed';
+          em.style.left = (e.clientX + (Math.random()*400 - 200)) + 'px';
+          em.style.top = (e.clientY - 100 + (Math.random()*200 - 50)) + 'px';
+          em.style.fontSize = (Math.random()*40 + 30) + 'px';
+          em.style.fontWeight = 'bold';
+          em.style.pointerEvents = 'none';
+          em.style.transition = 'all 1.4s cubic-bezier(0.2,0.8,0.3,1.2)';
+          em.style.zIndex = '9999';
+          em.style.textShadow = '4px 4px 0 #ffae6a';
+          document.body.appendChild(em);
+          setTimeout(() => {
+            em.style.transform = `translateY(-350px) rotate(600deg) scale(2.8)`;
+            em.style.opacity = '0';
+          }, 20);
+          setTimeout(() => { if(em.parentNode) em.remove(); }, 1600);
+        }
+        // big toast
+        const toast = document.createElement('div');
+        toast.innerHTML = '🥳 HAPPY BIRTHDAY ASIM BHAI! 🥳';
+        toast.style.position = 'fixed';
+        toast.style.top = '50%';
+        toast.style.left = '50%';
+        toast.style.transform = 'translate(-50%, -50%) rotate(1deg)';
+        toast.style.background = '#ffd966';
+        toast.style.color = '#2c1609';
+        toast.style.fontSize = '4rem';
+        toast.style.fontWeight = '900';
+        toast.style.padding = '2.5rem 5rem';
+        toast.style.borderRadius = '15rem';
+        toast.style.boxShadow = '0 30px 0 #aa451b, 0 40px 30px #000';
+        toast.style.border = '8px solid white';
+        toast.style.zIndex = '10000';
+        toast.style.textAlign = 'center';
+        document.body.appendChild(toast);
+        setTimeout(() => { if(toast.parentNode) toast.remove(); }, 2200);
+      });
+
+      // marquee pause on hover
+      const track = document.querySelector('.marquee-track');
+      if (track) {
+        track.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+        track.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
+      }
+    })();
+  </script>
+</body>
+</html>
